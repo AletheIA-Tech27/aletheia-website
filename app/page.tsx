@@ -44,7 +44,7 @@ export default function HomePage() {
       <Pricing />
       <SandboxDemo />
       <FAQ />
-      <section id="contacto" className="section-padding bg-muted/30" aria-labelledby="contacto-heading">
+      <section id="contacto" className="section-padding bg-neutral-50" aria-labelledby="contacto-heading">
         <div className="container-narrow">
           <LeadForm />
         </div>
