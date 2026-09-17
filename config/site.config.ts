@@ -4,7 +4,7 @@ const rawConfig = {
   name: 'AletheIA',
   tagline: 'Desarrollo web para negocios locales en México',
   description: 'Creamos sitios web y sistemas digitales para negocios locales en México. Presencia, conversión y automatización.',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aletheia-starter.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://aletheia-starter.vercel.app',
   phone: '+52 7202131181',
   whatsapp: '527202131181',
   email: 'aletheia.webtech@gmail.com',
