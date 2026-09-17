@@ -34,6 +34,7 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: #0a0a0a;
   }
   html {
     scroll-behavior: smooth;
@@ -50,4 +51,40 @@
   .section-padding {
     @apply py-16 sm:py-24 lg:py-32;
   }
+}
+
+/* Respect prefers-reduced-motion: reduce
+   Disable all transform transitions and hover-scale effects. */
+@media (prefers-reduced-motion: reduce) {
+  * ,
+  button,
+  a {
+    @apply transition-none;
+  }
+  .animate-ping,
+  .animate-bounce,
+  .animate-pulse {
+    @apply animate-none;
+  }
+}
+
+/* Hero section dark background with blueprint grid pattern */
+.hero-grid-bg {
+  background-color: #0a0a0a;
+  background-image:
+    linear-gradient(rgba(249,115,22,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249,115,22,0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.hero-grid-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 60%, #0a0a0a 100%);
+}
+.hero-grid-bg .container-narrow {
+  position: relative;
+  z-index: 2;
 }

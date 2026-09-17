@@ -1,3 +1,5 @@
+'use client';
+
 import { siteConfig } from '@/config/site.config';
 import {
   Wrench,
@@ -10,6 +12,7 @@ import {
   Home,
   Building,
 } from 'lucide-react';
+import { useScrollReveal } from '@/lib/hooks/use-scroll-reveal';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Wrench,
@@ -38,7 +41,7 @@ function ServiceCard({ service }: ServiceCardProps) {
 
   return (
     <article
-      className="group relative bg-white rounded-xl border border-border p-6 sm:p-8 transition-all duration-300 hover:shadow-lg hover:border-brand-accent/30 hover:-translate-y-1"
+      className="group relative bg-white rounded-xl border border-border p-6 sm:p-8 transition-all duration-300 hover:shadow-xl hover:border-brand-accent/30 hover:-translate-y-1"
     >
       <div className="absolute top-0 right-0 w-24 h-24 bg-brand-accent-soft rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
       <div className="relative flex flex-col h-full">
@@ -64,6 +67,7 @@ function ServiceCard({ service }: ServiceCardProps) {
 
 export default function Services() {
   const services = siteConfig.services ?? [];
+  const [headerRef, headerVisible] = useScrollReveal();
 
   if (services.length === 0) {
     return null;
@@ -72,7 +76,10 @@ export default function Services() {
   return (
     <section id="servicios" className="section-padding bg-white" aria-labelledby="servicios-heading">
       <div className="container-narrow">
-        <header className="text-center max-w-2xl mx-auto mb-16">
+        <header
+          ref={headerRef}
+          className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        >
           <h2
             id="servicios-heading"
             className="font-display text-3xl sm:text-4xl font-bold text-brand-ink mb-4"

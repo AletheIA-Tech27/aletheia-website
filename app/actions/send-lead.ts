@@ -21,6 +21,7 @@ export async function sendLeadAction(data: LeadInput): Promise<{ ok: boolean; me
     name: validated.name,
     email: validated.email,
     phone: validated.phone,
+    businessType: validated.businessType,
     message: validated.message,
   });
 

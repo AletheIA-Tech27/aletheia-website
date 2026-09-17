@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { leadSchema, type LeadInput } from '@/lib/validations/lead.schema';
 import { sendLeadAction } from '@/app/actions/send-lead';
@@ -12,6 +12,8 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { CheckCircle, Loader2, Mail, Phone, MessageSquare } from 'lucide-react';
 import { siteConfig } from '@/config/site.config';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useScrollReveal } from '@/lib/hooks/use-scroll-reveal';
 
 export default function LeadForm() {
   const [isPending, startTransition] = useTransition();
@@ -22,6 +24,7 @@ export default function LeadForm() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<LeadInput>({
     resolver: zodResolver(leadSchema),
@@ -30,6 +33,7 @@ export default function LeadForm() {
       email: '',
       phone: '',
       message: '',
+      businessType: '',
       website: '',
     },
   });
@@ -59,9 +63,14 @@ export default function LeadForm() {
 
   const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
 
+    const [headerRef, headerVisible] = useScrollReveal();
+
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="text-center mb-8">
+      <div
+        ref={headerRef}
+        className={`text-center mb-8 transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+      >
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-brand-ink mb-4">
           Solicita tu presupuesto
         </h2>
@@ -141,7 +150,35 @@ export default function LeadForm() {
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 md:col-span-2">
+          <Label htmlFor="businessType">Tipo de negocio *</Label>
+          <Controller
+            control={control}
+            name="businessType"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value} defaultValue="">
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecciona tu sector" />
+                </SelectTrigger>
+                <SelectContent>
+                  {siteConfig.nichos?.map((nicho) => (
+                    <SelectItem key={nicho.id} value={nicho.label}>
+                      {nicho.label}
+                    </SelectItem>
+                  ))}
+                  <SelectItem value="Otro">Otro</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.businessType && (
+            <p id="businessType-error" className="text-sm text-destructive" role="alert">
+              {errors.businessType.message}
+            </p>
+          )}
+        </div>
+
+        <div className="space-y-2 md:col-span-2">
           <Label htmlFor="message">Mensaje *</Label>
           <Textarea
             id="message"
@@ -243,8 +280,6 @@ export default function LeadForm() {
           <a href="/aviso-privacidad" target="_blank" rel="noopener" className="underline hover:text-brand-accent">
             Ver aviso completo
           </a>
-          {' '}
-          [PENDIENTE: URL aviso de privacidad]
         </p>
       </div>
     </div>

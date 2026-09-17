@@ -5,6 +5,7 @@ export const leadSchema = z.object({
   email: z.string().email('Ingresa un email válido'),
   phone: z.string().min(8, 'Ingresa un teléfono válido').max(20),
   message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres').max(2000),
+  businessType: z.string().min(1, 'Selecciona un tipo de negocio'),
   consent: z.literal(true, {
     errorMap: () => ({ message: 'Debes aceptar la política de privacidad' }),
   }),

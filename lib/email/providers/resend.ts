@@ -14,7 +14,7 @@ export class ResendProvider implements EmailProvider {
   async send(payload: EmailPayload): Promise<EmailResult> {
     const resend = getResendClient();
     const { data, error } = await resend.emails.send({
-      from: 'AletheIA <noreply@aletheia.local>',
+      from: 'AletheIA <onboarding@resend.dev>',
       to: payload.to,
       subject: payload.subject,
       html: payload.html,

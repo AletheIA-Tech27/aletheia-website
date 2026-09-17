@@ -7,7 +7,7 @@ interface SendLeadResult {
   error?: string;
 }
 
-function buildLeadEmailHtml(data: { name: string; email: string; phone: string; message: string }): string {
+function buildLeadEmailHtml(data: { name: string; email: string; phone: string; businessType: string; message: string }): string {
   return `
 <!DOCTYPE html>
 <html>
@@ -34,6 +34,10 @@ function buildLeadEmailHtml(data: { name: string; email: string; phone: string; 
         <td style="padding: 12px 0; color: #111827;">${data.phone}</td>
       </tr>
       <tr>
+        <td style="padding: 12px 0; font-weight: 600; color: #374151;">Tipo de negocio:</td>
+        <td style="padding: 12px 0; color: #111827;">${data.businessType}</td>
+      </tr>
+      <tr>
         <td style="padding: 12px 0; font-weight: 600; color: #374151; vertical-align: top;">Mensaje:</td>
         <td style="padding: 12px 0; color: #111827; white-space: pre-wrap;">${data.message}</td>
       </tr>
@@ -48,13 +52,14 @@ function buildLeadEmailHtml(data: { name: string; email: string; phone: string; 
   `.trim();
 }
 
-function buildLeadEmailText(data: { name: string; email: string; phone: string; message: string }): string {
+function buildLeadEmailText(data: { name: string; email: string; phone: string; businessType: string; message: string }): string {
   return `
 Nuevo Lead - ${siteConfig.name}
 
 Nombre: ${data.name}
 Email: ${data.email}
 Teléfono: ${data.phone}
+Tipo de negocio: ${data.businessType}
 Mensaje:
 ${data.message}
 
@@ -67,6 +72,7 @@ export async function sendLeadEmail(data: {
   name: string;
   email: string;
   phone: string;
+  businessType: string;
   message: string;
 }): Promise<SendLeadResult> {
   const destinationEmail = process.env.LEAD_DESTINATION_EMAIL;

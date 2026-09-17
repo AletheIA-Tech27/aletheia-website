@@ -20,6 +20,10 @@ const geist = Geist({
   preload: true,
 });
 
+// Mientras el sitio viva en una URL preview de Vercel, no se indexa.
+// Cuando se conecte el dominio final, NEXT_PUBLIC_SITE_URL cambia y esto se resuelve solo.
+const isProductionDomain = !siteConfig.url.includes('vercel.app');
+
 export const metadata: Metadata = {
   title: siteConfig.seo.title,
   description: siteConfig.seo.description,
@@ -27,7 +31,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  robots: 'index, follow',
+  robots: isProductionDomain ? 'index, follow' : 'noindex, follow',
   openGraph: {
     type: 'website',
     locale: 'es_MX',
@@ -43,9 +47,11 @@ export const metadata: Metadata = {
     description: siteConfig.seo.description,
     images: siteConfig.seo.ogImage ? [siteConfig.seo.ogImage] : [],
   },
-  verification: {
-    google: '[PENDIENTE: google-site-verification]',
-  },
+  // Se omite por completo hasta tener el código real de Search Console.
+  // Un placeholder literal aquí se renderiza tal cual en el HTML público.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION && {
+    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION },
+  }),
 };
 
 export const viewport: Viewport = {
@@ -62,28 +68,24 @@ export default function RootLayout({
 }) {
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'ProfessionalService',
     name: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,
-    address: siteConfig.address
-      ? {
-          '@type': 'PostalAddress',
-          streetAddress: siteConfig.address,
-          addressLocality: '[PENDIENTE: ciudad]',
-          addressRegion: '[PENDIENTE: estado]',
-          postalCode: '[PENDIENTE: código postal]',
-          addressCountry: 'MX',
-        }
-      : undefined,
+    serviceType: 'Desarrollo web y automatización para negocios locales',
+    areaServed: {
+      '@type': 'Country',
+      name: 'México',
+    },
+    priceRange: '$$',
     openingHoursSpecification: siteConfig.schedule
       ? {
           '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          opens: '[PENDIENTE: hora apertura]',
-          closes: '[PENDIENTE: hora cierre]',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '09:00',
+          closes: '18:00',
         }
       : undefined,
     sameAs: siteConfig.social?.map((s) => s.href) ?? [],

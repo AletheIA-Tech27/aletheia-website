@@ -26,6 +26,25 @@ export const seoSchema = z.object({
   keywords: z.array(z.string()).optional(),
 });
 
+export const pricingTierSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  tagline: z.string().min(1),
+  priceFrom: z.number().int().positive(),
+  features: z.array(z.string()).min(1),
+  idealFor: z.string().min(1),
+  highlighted: z.boolean().default(false),
+  ctaText: z.string().min(1),
+});
+
+export const nichoSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  problem: z.string().min(1),
+  solution: z.string().min(1),
+  icon: z.string().min(1),
+});
+
 export const siteConfigSchema = z.object({
   name: z.string().min(1),
   tagline: z.string().min(1),
@@ -40,6 +59,8 @@ export const siteConfigSchema = z.object({
   nav: z.array(navItemSchema).optional(),
   seo: seoSchema,
   services: z.array(serviceSchema).optional(),
+  pricing: z.array(pricingTierSchema).optional(),
+  nichos: z.array(nichoSchema).optional(),
 });
 
 export type SiteConfig = z.infer<typeof siteConfigSchema>;
@@ -47,3 +68,5 @@ export type NavItem = z.infer<typeof navItemSchema>;
 export type Service = z.infer<typeof serviceSchema>;
 export type SocialLink = z.infer<typeof socialLinkSchema>;
 export type SEOConfig = z.infer<typeof seoSchema>;
+export type PricingTier = z.infer<typeof pricingTierSchema>;
+export type Nicho = z.infer<typeof nichoSchema>;
