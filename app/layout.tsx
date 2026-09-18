@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site.config';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
+import FloatingWhatsapp from '@/components/ui/floating-whatsapp';
 import './globals.css';
 
 const inter = Inter({
@@ -108,6 +109,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <Toaster />
+        <FloatingWhatsapp />
       </body>
     </html>
   );

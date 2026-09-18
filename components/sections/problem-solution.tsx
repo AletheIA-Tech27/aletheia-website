@@ -1,7 +1,7 @@
 'use client';
 
 import { siteConfig } from '@/config/site.config';
-import { Search, Users, Zap, CheckCircle } from 'lucide-react';
+import { Search, Users, Zap } from 'lucide-react';
 import { useScrollReveal } from '@/lib/hooks/use-scroll-reveal';
 
 const steps = [
@@ -113,35 +113,24 @@ export default function ProblemSolution() {
                 </div>
 
                 <div className="w-full lg:w-1/2 flex-1">
-                  <div className={`p-6 sm:p-8 rounded-xl border ${step.borderColor} bg-white ${step.highlighted ? 'shadow-lg ring-2 ring-brand-accent/20 relative' : ''}`}>
+                  <div className={`p-6 sm:p-8 rounded-xl border ${step.borderColor} ${step.bgColor} ${step.highlighted ? 'shadow-lg ring-2 ring-brand-accent/20' : ''}`}>
                     {step.highlighted && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-brand-accent text-white text-xs font-semibold rounded-full whitespace-nowrap">
                         Más elegido
                       </div>
                     )}
-                    <div className="mb-4">
-                      <p className={`text-sm font-medium ${step.color} uppercase tracking-wide mb-1`}>{step.tier}</p>
-                      <p className="font-display text-2xl font-bold text-brand-ink">{step.tierLabel}</p>
-                    </div>
-                    <ul className="space-y-3" role="list">
-                      {step.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-brand-ink-muted">
-                          <CheckCircle className={`h-5 w-5 flex-shrink-0 mt-0.5 ${step.color}`} aria-hidden="true" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <span className={`text-sm font-semibold ${step.color} uppercase tracking-wide px-3 py-1 rounded-full ${step.bgColor} inline-block mb-3`}>
+                      {step.tier}
+                    </span>
+                    <p className="text-brand-ink-muted text-sm mb-4">
+                      Ve el detalle completo de precio e incluye en la sección de Precios abajo.
+                    </p>
                     <a
-                      href="#contacto"
-                      className={`mt-6 block w-full text-center py-3 px-4 rounded-lg font-medium text-sm transition-colors transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] ${step.highlighted
-                        ? 'bg-brand-accent text-white hover:bg-brand-accent-hover'
-                        : 'bg-white border-2 border-brand-accent text-brand-accent hover:bg-brand-accent-soft'
-                      }`}
-                      aria-label={`Contactar sobre ${step.tier}`}
+                      href="#precios"
+                      className={`block w-full text-center py-3 px-4 rounded-lg font-medium text-sm transition-colors transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] bg-white border-2 border-brand-accent text-brand-accent hover:bg-brand-accent-soft`}
+                      aria-label={`Ver detalles de ${step.tier}`}
                     >
-                      {step.id === 'presencia' && 'Quiero mi web de presencia'}
-                      {step.id === 'conversion' && 'Quiero convertir más'}
-                      {step.id === 'sistema' && 'Quiero automatizar'}
+                      Ver precio y detalles →
                     </a>
                   </div>
                 </div>
