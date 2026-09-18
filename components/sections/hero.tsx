@@ -13,7 +13,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden hero-grid-bg" aria-labelledby="hero-heading">
-      <div className="min-h-screen flex items-center pt-16 sm:pt-20 lg:pt-24 pb-8">
+      <div className="min-h-screen flex items-center pt-16 sm:pt-20 lg:pt-24 pb-8 border-b border-zinc-800">
       <div className="container-narrow">
         <div
           ref={contentRef}

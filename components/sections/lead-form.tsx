@@ -132,12 +132,12 @@ export default function LeadForm() {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="phone">Teléfono *</Label>
+        <div className="space-y-2 mb-2">
+          <Label htmlFor="phone" className="mb-1.5 block">Teléfono *</Label>
           <Input
             id="phone"
             type="tel"
-            placeholder="+52 55 1234 5678"
+            placeholder="55 1234 5678 (10 dígitos)"
             {...register('phone')}
             disabled={isSubmitting}
             aria-invalid={!!errors.phone}
@@ -149,9 +149,8 @@ export default function LeadForm() {
             </p>
           )}
         </div>
-
-        <div className="space-y-2 md:col-span-2">
-          <Label htmlFor="businessType">Tipo de negocio *</Label>
+        <div className="space-y-2 md:col-span-2 mb-2">
+          <Label htmlFor="businessType" className="mb-1.5 block">Tipo de negocio *</Label>
           <Controller
             control={control}
             name="businessType"
