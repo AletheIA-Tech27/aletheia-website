@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/site.config';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Phone, MessageCircle, CheckCircle } from 'lucide-react';
 import { useScrollReveal } from '@/lib/hooks/use-scroll-reveal';
+import { trackEvent } from '@/lib/gtag';
 
 export default function Hero() {
   const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`;
@@ -44,7 +45,7 @@ export default function Hero() {
               size="xl"
               className="group w-full sm:w-auto gap-3"
             >
-              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent({ action: 'click_whatsapp', category: 'Conversion', label: 'Hero CTA' })}>
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
                 Contactar por WhatsApp
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />

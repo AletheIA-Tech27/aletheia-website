@@ -14,6 +14,7 @@ import { CheckCircle, Loader2, Mail, Phone, MessageSquare } from 'lucide-react';
 import { siteConfig } from '@/config/site.config';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useScrollReveal } from '@/lib/hooks/use-scroll-reveal';
+import { trackEvent } from '@/lib/gtag';
 
 export default function LeadForm() {
   const [isPending, startTransition] = useTransition();
@@ -50,6 +51,7 @@ export default function LeadForm() {
         });
         reset();
         setShowSuccess(true);
+        trackEvent({ action: 'submit_form', category: 'Conversion', label: 'Lead Form' });
         setTimeout(() => setShowSuccess(false), 5000);
       } else {
         toast({
