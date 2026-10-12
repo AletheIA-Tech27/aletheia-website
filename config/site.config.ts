@@ -54,7 +54,7 @@ const rawConfig = {
       id: 'presencia',
       name: 'Presencia',
       tagline: 'Tu tarjeta de presentación digital profesional',
-      priceFrom: 9900,
+      priceFrom: 5000,
       features: [
         'Diseño personalizado (no plantilla)',
         '100% responsive móvil/desktop',
@@ -72,7 +72,7 @@ const rawConfig = {
       id: 'conversion',
       name: 'Conversión',
       tagline: 'Convierte tu tráfico en clientes reales',
-      priceFrom: 14900,
+      priceFrom: 10000,
       features: [
         'Todo lo de Presencia',
         'Arquitectura de conversión (above-the-fold optimizado)',
@@ -92,7 +92,7 @@ const rawConfig = {
       id: 'sistema',
       name: 'Sistema',
       tagline: 'Automatiza tu operación y escala sin fricción',
-      priceFrom: 24900,
+      priceFrom: 20000,
       features: [
         'Todo lo de Conversión',
         'Sistema de reservas propio (disponibilidad, confirmaciones, recordatorios)',
