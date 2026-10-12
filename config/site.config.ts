@@ -22,7 +22,7 @@ const rawConfig = {
   ],
   seo: {
     title: 'AletheIA — Desarrollo web para negocios locales en México',
-    description: 'Creamos sitios web y sistemas digitales para negocios locales. Presencia digital, conversión y automatización. Desde $9,900 MXN.',
+    description: 'Creamos sitios web y sistemas digitales para negocios locales. Presencia digital, conversión y automatización. Desde $5,000 MXN.',
     ogImage: 'https://aletheia-starter.vercel.app/og-image.jpg',
     keywords: ['desarrollo web México', 'sitios web negocios locales', 'automatización PyMEs', 'diseño web barberías', 'diseño web restaurantes'],
   },
